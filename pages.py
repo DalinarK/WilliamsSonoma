@@ -5,6 +5,7 @@ from base import *
 class MainPage(Page):
     def check_page_loaded(self):
         # Check to see if the page loaded up properly
+        # Output: boolean on whether or not the page loaded
         self.remove_pop_ups()
         select = self.driver.find_elements_by_css_selector(".logo-image")
         if len(select) == 1:
@@ -33,7 +34,6 @@ class MainPage(Page):
     def choose_item_category(self, itemCategory):
         self.click_item(itemCategory)
         select = self.return_text(".shop-title.supersection-title")
-        print ("Item page selected: " + select)
         return select
 
     # Choose and add a a random item to the checkout
