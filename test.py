@@ -23,7 +23,7 @@ class testCases(unittest.TestCase):
     def choose_cookware_test(self):
         print ("Testing navigating to category")
         page = MainPage(self.driver)
-        self.assertTrue(page.choose_cookware())
+        self.assertEqual(page.choose_cookware(), "Cookware Sets")
         print("")
 
     def choose_kettle_category_test(self):

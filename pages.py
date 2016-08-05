@@ -20,22 +20,24 @@ class MainPage(Page):
             select[0].click()
 
     # Choose cookware category
+    # Output: returns the title of the page clicked
     def choose_cookware(self):
         self.click_item("a[href='http://www.williams-sonoma.com/shop/cookware/?cm_type=gnav']")
-        # select = self.driver.find_elements_by_css_selector("a[href='http://www.williams-sonoma.com/shop/cookware/?cm_type=gnav']")
-        # select[0].send_keys("\n")
-        select = self.click_item(".topnav-cookware.topnav-cookware_current.active")
+        # self.click_item(".topnav-cookware.topnav-cookware_current.active")
+        select = self.return_text("a[href='http://www.williams-sonoma.com/shop/cookware/cookware-sets/?cm_type=lnav']")
         return select
 
+
     # Choose the tea kettle category
+    # Output: returns the title of the item category chosen
     def choose_item_category(self, itemCategory):
         self.click_item(itemCategory)
         select = self.return_text(".shop-title.supersection-title")
         print ("Item page selected: " + select)
         return select
 
-    # Choose and add an item to the checkout
-    # Output: returns the
+    # Choose and add a a random item to the checkout
+    # Output: returns the checkout page header text if it exists
     def choose_specific_item(self):
         # randomly choose an item in the category
         select = self.driver.find_elements_by_css_selector(".product-cell")
@@ -58,7 +60,7 @@ class MainPage(Page):
             select[0].send_keys("\n")
             return self.driver.find_element_by_css_selector(".checkout-page-header").text
         else:
-            return "Element not found"
+            return None
 
     # Save the item for later
     # Output: A list that contains the item number of both the item to be saved and the item that was actually saved.
