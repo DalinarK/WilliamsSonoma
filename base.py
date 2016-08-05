@@ -1,4 +1,4 @@
-from selenium import webdriver
+import sys
 
 # This is the base class for all the pages
 class Page(object):

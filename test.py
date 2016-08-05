@@ -1,38 +1,44 @@
 import unittest
+from pages import MainPage
 from selenium import webdriver
-from pages import *
-from selenium.webdriver.common.by import By
 
 class testCases(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome("C:\\Python34\\chromedriver.exe")
         self.driver.get("http://www.williams-sonoma.com")
 
-    def test_page_loaded(self):
+    def test_full_suite(self):
+        self.page_loaded_test()
+        self.choose_cookware_test()
+        self.choose_kettle_category_test()
+        self.choose_a_kettle_test()
+        self.save_for_later_test()
+
+    def page_loaded_test(self):
         print("Testing home page loads up")
         page = MainPage(self.driver)
         self.assertTrue(page.check_page_loaded())
         print("")
 
-    def test_choose_cookware(self):
+    def choose_cookware_test(self):
         print ("Testing navigating to category")
         page = MainPage(self.driver)
         self.assertTrue(page.choose_cookware())
         print("")
 
-    def test_choose_kettle_category(self):
+    def choose_kettle_category_test(self):
         print("Testing navigating to kettles")
         page = MainPage(self.driver)
-        self.assertEqual(page.choose_item_category(), "Tea Kettles")
+        self.assertEqual(page.choose_item_category("a[href='http://www.williams-sonoma.com/shop/cookware/teakettles/?cm_type=lnav']"), "Tea Kettles")
         print("")
 
-    def test_choose_a_kettle(self):
+    def choose_a_kettle_test(self):
         print ("Testing tea kettle selection")
         page = MainPage(self.driver)
         self.assertEqual(page.choose_specific_item(), "Shopping Cart")
         print("")
 
-    def test_save_for_later(self):
+    def save_for_later_test(self):
         print ("Testing save for later")
         page = MainPage(self.driver)
         itemList = page.save_for_later()

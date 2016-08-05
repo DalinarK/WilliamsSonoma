@@ -1,6 +1,4 @@
-from selenium import webdriver
 import random
-import sys
 from base import *
 
 
@@ -20,9 +18,9 @@ class MainPage(Page):
         if len(select) == 1:
             print ("Removing pop up ad")
             select[0].click()
+
     # Choose cookware category
     def choose_cookware(self):
-        self.remove_pop_ups()
         self.click_item("a[href='http://www.williams-sonoma.com/shop/cookware/?cm_type=gnav']")
         # select = self.driver.find_elements_by_css_selector("a[href='http://www.williams-sonoma.com/shop/cookware/?cm_type=gnav']")
         # select[0].send_keys("\n")
@@ -30,10 +28,8 @@ class MainPage(Page):
         return select
 
     # Choose the tea kettle category
-    def choose_item_category(self):
-        self.remove_pop_ups()
-        self.click_item("a[href='http://www.williams-sonoma.com/shop/cookware/?cm_type=gnav']")
-        self.click_item("a[href='http://www.williams-sonoma.com/shop/cookware/teakettles/?cm_type=lnav']")
+    def choose_item_category(self, itemCategory):
+        self.click_item(itemCategory)
         select = self.return_text(".shop-title.supersection-title")
         print ("Item page selected: " + select)
         return select
@@ -41,8 +37,6 @@ class MainPage(Page):
     # Choose and add an item to the checkout
     # Output: returns the
     def choose_specific_item(self):
-        self.choose_item_category()
-
         # randomly choose an item in the category
         select = self.driver.find_elements_by_css_selector(".product-cell")
         random.seed()
@@ -69,7 +63,6 @@ class MainPage(Page):
     # Save the item for later
     # Output: A list that contains the item number of both the item to be saved and the item that was actually saved.
     def save_for_later(self):
-        self.choose_specific_item()
 
         # Extract item number of the item to be saved
         itemSaved = [self.return_text(".cart-table-row-sku")]
