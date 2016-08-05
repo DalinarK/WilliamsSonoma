@@ -17,7 +17,6 @@ class MainPage(Page):
     def remove_pop_ups(self):
         select = self.driver.find_elements_by_css_selector(".overlayCloseButton.overlayCloseX")
         if len(select) == 1:
-            print ("Removing pop up ad")
             select[0].click()
 
     # Choose cookware category
